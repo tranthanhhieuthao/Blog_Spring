@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+<a href="/blog">Bach to List</a>
+<h1 style="font-size: 40px">Blog of Tran Hieu</h1>
+<table style="width: 900px;height: 600px;font-size: 20px;text-align: center;background: #4CAF50" border="1">
+    <tr>
+        <th>Detail</th>
+
+    </tr>
+    <th:block th:each="ba : ${blog}">
+        <tr>
+            <td th:text="${ba.detail}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
