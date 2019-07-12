@@ -1,7 +1,9 @@
 package com.codegym.data;
 
 import com.codegym.data.service.BlogService;
+import com.codegym.data.service.CategoryService;
 import com.codegym.data.service.impl.BlogServiceImpl;
+import com.codegym.data.service.impl.CategoryServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -48,6 +50,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         this.applicationContext =applicationContext;
     }
 
+    @Bean
+    public CategoryService categoryService(){
+        return new CategoryServiceImpl();
+    }
 
     @Bean
     public BlogService blogService(){

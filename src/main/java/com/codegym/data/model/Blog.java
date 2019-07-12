@@ -1,5 +1,9 @@
 package com.codegym.data.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,10 +14,26 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
+    @Column(updatable = false)
+    @CreationTimestamp
+    @JsonIgnore
     private Date date;
-    private String Category;
     private String describle;
     private String detail;
+
+    @ManyToOne
+    @JoinColumn(name = "Category_id")
+    private Category category;
+
+    public Category getCategory(){
+        return category;
+    }
+
+    public void  setCategory(Category category){
+        this.category = category;
+    }
 
     public String getDetail() {
         return detail;
@@ -34,14 +54,14 @@ public class Blog {
         this.date = date;
     }
 
-    private Blog(String Category, String describle){
-        this.Category = Category;
+    public Blog(String detail, String describle){
+        this.detail =detail;
         this.describle = describle;
     }
 
     @Override
     public String toString(){
-        return String.format("Blog[id=%d,Category='%s',describle='%s']",id,Category,describle);
+        return String.format("Blog[id=%d,describle='%s']",id,describle);
     }
 
     public Long getId() {
@@ -50,14 +70,6 @@ public class Blog {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCategory() {
-        return Category;
-    }
-
-    public void setCategory(String Category) {
-        this.Category = Category;
     }
 
     public String getDescrible() {
